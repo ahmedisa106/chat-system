@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Providers;
+
+use App\Models\Conversation;
+use App\Models\Message;
+use App\Models\User;
+use App\Observers\ConversationObserver;
+use App\Observers\MessageObserver;
+use App\Observers\UserObserver;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\ServiceProvider;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any application services.
+     */
+    public function register(): void
+    {
+        //
+    }
+
+    /**
+     * Bootstrap any application services.
+     */
+    public function boot(): void
+    {
+        User::observe(UserObserver::class);
+        Message::observe(MessageObserver::class);
+        Conversation::observe(ConversationObserver::class);
+
+        // URL::forceScheme("https");
+    }
+}

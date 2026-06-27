@@ -1,0 +1,106 @@
+.new-chat-page {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  background: var(--color-surface);
+}
+
+.new-chat-page__hint {
+  margin: 0;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.contact-list {
+  flex: 1;
+  overflow-y: auto;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.contact-list > li {
+  list-style: none;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-bottom: 1px solid var(--color-border);
+  text-decoration: none;
+  color: inherit;
+  transition: background var(--transition-fast);
+}
+
+.contact-item:hover {
+  background: var(--color-hover);
+}
+
+.contact-item__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.contact-item__name {
+  display: block;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-text);
+  margin-bottom: 2px;
+}
+
+.contact-item__phone {
+  display: block;
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+  direction: ltr;
+  text-align: right;
+}
+
+.contact-item__badge {
+  flex-shrink: 0;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  background: var(--color-success-bg);
+  padding: 4px 8px;
+  border-radius: var(--radius-full);
+}
+
+.contact-list__empty {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2xl);
+  text-align: center;
+  color: var(--color-text-muted);
+  flex: 1;
+}
+
+.contact-list__empty.show {
+  display: flex;
+}
+
+.contact-list__empty-icon {
+  font-size: 2.5rem;
+  opacity: 0.4;
+  margin-bottom: var(--spacing-md);
+}
+
+@media (max-width: 767.98px) {
+  .new-chat-page__hint {
+    padding: var(--spacing-sm) var(--page-padding);
+  }
+
+  .contact-list {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+}

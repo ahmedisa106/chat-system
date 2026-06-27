@@ -1,0 +1,120 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+@media (max-width: 575.98px) {
+  .form-control,
+  .search-bar__input,
+  .chat-input-bar__input,
+  .form-control-custom {
+    font-size: 16px !important;
+  }
+
+  .welcome-panel {
+    padding: var(--spacing-lg);
+  }
+
+  .welcome-panel__icon {
+    font-size: 3.5rem;
+  }
+
+  .welcome-panel__title {
+    font-size: 1.25rem;
+  }
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+.page-header__back,
+.page-header__action,
+.page-header__tool,
+.sidebar-top__btn,
+.chat-input-bar__btn,
+.filter-tabs__btn {
+  touch-action: manipulation;
+}
+
+a {
+  color: var(--color-primary-dark);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-secondary);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.page-shell {
+  min-height: 100vh;
+  min-height: 100dvh;
+  min-height: var(--vvh, 100dvh);
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+}
+
+.welcome-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--spacing-xl);
+  background: var(--color-bg);
+}
+
+.welcome-panel__icon {
+  font-size: 5rem;
+  color: var(--color-primary);
+  opacity: 0.35;
+  margin-bottom: var(--spacing-lg);
+}
+
+.welcome-panel__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 var(--spacing-sm);
+}
+
+.welcome-panel__text {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  max-width: 400px;
+  margin: 0;
+  line-height: 1.7;
+}

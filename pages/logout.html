@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>تسجيل الخروج</title>
+</head>
+<body>
+  <script>
+    sessionStorage.removeItem("chat-auth");
+    sessionStorage.removeItem("chat-user-phone");
+    window.location.replace("login.html?logout=1");
+  </script>
+</body>
+</html>
