@@ -1,0 +1,212 @@
+.voice-call {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg);
+  background: linear-gradient(160deg, #075e54 0%, #128c7e 45%, #0b3d36 100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-normal), visibility var(--transition-normal);
+}
+
+.voice-call--visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.voice-call__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+  color: #fff;
+}
+
+.voice-call__avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+}
+
+.voice-call--ringing .voice-call__avatar::after {
+  content: "";
+  position: absolute;
+  inset: -12px;
+  border-radius: var(--radius-full);
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  animation: voice-call-pulse 1.6s ease-out infinite;
+}
+
+.voice-call--ringing .voice-call__avatar::before {
+  content: "";
+  position: absolute;
+  inset: -24px;
+  border-radius: var(--radius-full);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  animation: voice-call-pulse 1.6s ease-out 0.4s infinite;
+}
+
+@keyframes voice-call-pulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  70% {
+    transform: scale(1.15);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.15);
+    opacity: 0;
+  }
+}
+
+.voice-call__name {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 var(--spacing-sm);
+}
+
+.voice-call__status {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 0 var(--spacing-xl);
+  min-height: 1.5rem;
+}
+
+.voice-call__timer {
+  font-size: 1.125rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 var(--spacing-xl);
+}
+
+.voice-call__timer[hidden],
+.voice-call__status[hidden] {
+  display: none !important;
+}
+
+.voice-call__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xl);
+  margin-top: auto;
+  padding-top: var(--spacing-2xl);
+}
+
+.voice-call__ctrl {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
+.voice-call__ctrl-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.15);
+  font-size: 1.35rem;
+  transition: background var(--transition-fast);
+}
+
+.voice-call__ctrl:hover .voice-call__ctrl-icon {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.voice-call__ctrl--active .voice-call__ctrl-icon {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.voice-call__ctrl--end .voice-call__ctrl-icon {
+  background: var(--color-error);
+  font-size: 1.5rem;
+}
+
+.voice-call__ctrl--end:hover .voice-call__ctrl-icon {
+  background: #d93025;
+}
+
+.voice-call__ctrl-label {
+  font-size: var(--text-small);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.voice-call__incoming-actions {
+  display: flex;
+  gap: var(--spacing-2xl);
+  margin-top: var(--spacing-2xl);
+}
+
+.voice-call__incoming-actions[hidden] {
+  display: none !important;
+}
+
+.voice-call__ctrl--accept .voice-call__ctrl-icon {
+  background: var(--color-primary);
+}
+
+.voice-call__ctrl--decline .voice-call__ctrl-icon {
+  background: var(--color-error);
+}
+
+@media (max-width: 575.98px) {
+  .voice-call {
+    padding: var(--spacing-lg);
+    padding-top: max(var(--spacing-lg), var(--safe-top));
+    padding-bottom: max(var(--spacing-xl), env(safe-area-inset-bottom));
+  }
+
+  .voice-call__avatar {
+    width: 100px;
+    height: 100px;
+    font-size: 2.5rem;
+  }
+
+  .voice-call__name {
+    font-size: 1.5rem;
+  }
+
+  .voice-call__controls {
+    gap: var(--spacing-lg);
+  }
+
+  .voice-call__incoming-actions {
+    gap: var(--spacing-xl);
+  }
+}
+
+@media (max-width: 374.98px) {
+  .voice-call__ctrl-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 1.2rem;
+  }
+
+  .voice-call__name {
+    font-size: 1.25rem;
+  }
+}

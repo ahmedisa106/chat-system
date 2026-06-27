@@ -1,0 +1,39 @@
+<!-- شاشة المكالمة الصوتية — @include('partials.voice-call') -->
+<div class="voice-call" id="voiceCall" aria-hidden="true"
+  data-contact-name="{{ $contactName ?? 'سارة' }}"
+  data-contact-initial="{{ $contactInitial ?? 'س' }}"
+  data-contact-color="{{ $contactColor ?? '#128c7e' }}"
+  data-demo-incoming="{{ $demoIncoming ?? 'false' }}">
+  <div class="voice-call__inner">
+    <div class="voice-call__avatar avatar" id="callAvatar" style="background:#128c7e">س</div>
+    <h2 class="voice-call__name" id="callName">سارة</h2>
+    <p class="voice-call__status" id="callStatus">جاري الاتصال...</p>
+    <p class="voice-call__timer" id="callTimer" hidden>00:00</p>
+
+    <div class="voice-call__incoming-actions" id="callIncomingActions" hidden>
+      <button type="button" class="voice-call__ctrl voice-call__ctrl--decline" id="callDeclineBtn">
+        <span class="voice-call__ctrl-icon"><i class="bi bi-telephone-x-fill"></i></span>
+        <span class="voice-call__ctrl-label">رفض</span>
+      </button>
+      <button type="button" class="voice-call__ctrl voice-call__ctrl--accept" id="callAcceptBtn">
+        <span class="voice-call__ctrl-icon"><i class="bi bi-telephone-fill"></i></span>
+        <span class="voice-call__ctrl-label">رد</span>
+      </button>
+    </div>
+
+    <div class="voice-call__controls" id="callOutgoingControls">
+      <button type="button" class="voice-call__ctrl" id="callMuteBtn" title="كتم الصوت">
+        <span class="voice-call__ctrl-icon"><i class="bi bi-mic-fill"></i></span>
+        <span class="voice-call__ctrl-label">كتم</span>
+      </button>
+      <button type="button" class="voice-call__ctrl voice-call__ctrl--end" id="callEndBtn" title="إنهاء المكالمة">
+        <span class="voice-call__ctrl-icon"><i class="bi bi-telephone-x-fill"></i></span>
+        <span class="voice-call__ctrl-label">إنهاء</span>
+      </button>
+      <button type="button" class="voice-call__ctrl" id="callSpeakerBtn" title="مكبر الصوت">
+        <span class="voice-call__ctrl-icon"><i class="bi bi-volume-up-fill"></i></span>
+        <span class="voice-call__ctrl-label">سماعة</span>
+      </button>
+    </div>
+  </div>
+</div>

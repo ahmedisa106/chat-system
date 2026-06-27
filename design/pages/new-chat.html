@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>محادثة جديدة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/variables.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/conversations.css">
+  <link rel="stylesheet" href="../assets/css/new-chat.css">
+</head>
+<body class="page-shell">
+  <div class="chat-app chat-app--panel-open">
+    <aside class="sidebar-panel">
+      <div class="sidebar-top">
+        <div class="sidebar-profile">
+          <div class="avatar-wrap">
+            <div class="avatar avatar--sm" style="background:#075e54">أ</div>
+            <span class="status-dot status-dot--online" id="myStatusDot" title="متصل"></span>
+          </div>
+          <div class="sidebar-profile__info">
+            <span class="sidebar-profile__name">أحمد</span>
+            <button type="button" class="sidebar-profile__status-btn" id="statusToggle" data-status="online">
+              <i class="bi bi-circle-fill status-icon status-icon--online"></i>
+              <span class="status-label">متصل</span>
+            </button>
+          </div>
+        </div>
+        <div class="sidebar-top__actions">
+          <a href="new-chat.html" class="sidebar-top__btn sidebar-top__btn--active" title="محادثة جديدة"><i class="bi bi-chat-dots-fill"></i></a>
+          <a href="create-group.html" class="sidebar-top__btn" title="إنشاء مجموعة"><i class="bi bi-people-fill"></i></a>
+          <a href="logout.html" class="sidebar-top__btn sidebar-top__btn--logout" title="تسجيل الخروج"><i class="bi bi-box-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="search-bar">
+        <div class="search-bar__input-wrap">
+          <i class="bi bi-search search-bar__icon"></i>
+          <input type="text" class="search-bar__input" id="searchInput" placeholder="بحث في المحادثات...">
+        </div>
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-tabs__btn active" data-filter="all">الكل</button>
+        <button class="filter-tabs__btn" data-filter="dm">فردي</button>
+        <button class="filter-tabs__btn" data-filter="group">مجموعات</button>
+      </div>
+      <ul class="conversation-list" id="conversationList">
+        <li><a href="chat-c1.html" class="conversation-item" data-type="dm" data-name="سارة" data-preview="تمام، أشوفك بكرة"><div class="avatar-wrap"><div class="avatar" style="background:#128c7e">س</div><span class="status-dot status-dot--online" title="متصل"></span></div><div class="conversation-item__body"><div class="conversation-item__top"><span class="conversation-item__name">سارة</span><span class="conversation-item__time">10:30</span></div><div class="conversation-item__bottom"><span class="conversation-item__preview conversation-item__preview--unread">تمام، أشوفك بكرة</span><span class="unread-badge">3</span></div></div></a></li>
+        <li><a href="chat-c2.html" class="conversation-item" data-type="dm" data-name="محمد" data-preview="عفواً، تحت أمرك"><div class="avatar-wrap"><div class="avatar" style="background:#34b7f1">م</div><span class="status-dot status-dot--offline" title="غير متصل"></span></div><div class="conversation-item__body"><div class="conversation-item__top"><span class="conversation-item__name">محمد</span><span class="conversation-item__time">أمس</span></div><div class="conversation-item__bottom"><span class="conversation-item__preview">عفواً، تحت أمرك</span></div></div></a></li>
+        <li><a href="chat-g1.html" class="conversation-item" data-type="group" data-name="فريق التصميم" data-preview="📎 تقرير.pdf"><div class="avatar avatar--group"><i class="bi bi-people-fill"></i></div><div class="conversation-item__body"><div class="conversation-item__top"><span class="conversation-item__name">فريق التصميم <i class="bi bi-people conversation-item__type-icon"></i></span><span class="conversation-item__time">09:15</span></div><div class="conversation-item__bottom"><span class="conversation-item__preview conversation-item__preview--unread">📎 تقرير.pdf</span><span class="unread-badge">7</span></div></div></a></li>
+        <li><a href="chat-g2.html" class="conversation-item" data-type="group" data-name="أصدقاء الجامعة" data-preview="😂😂😂"><div class="avatar avatar--group"><i class="bi bi-people-fill"></i></div><div class="conversation-item__body"><div class="conversation-item__top"><span class="conversation-item__name">أصدقاء الجامعة <i class="bi bi-people conversation-item__type-icon"></i></span><span class="conversation-item__time">الجمعة</span></div><div class="conversation-item__bottom"><span class="conversation-item__preview conversation-item__preview--unread">😂😂😂</span><span class="unread-badge">2</span></div></div></a></li>
+      </ul>
+    </aside>
+
+    <main class="main-panel">
+      <header class="page-header">
+        <a href="index.html" class="page-header__back page-header__back--mobile-only" title="رجوع"><i class="bi bi-arrow-right"></i></a>
+        <h1 class="page-header__title">محادثة جديدة</h1>
+      </header>
+
+      <div class="new-chat-page">
+        <div class="search-bar">
+          <div class="search-bar__input-wrap">
+            <i class="bi bi-search search-bar__icon"></i>
+            <input type="text" class="search-bar__input" id="contactSearchInput" placeholder="ابحث بالاسم أو رقم الهاتف...">
+          </div>
+        </div>
+        <p class="new-chat-page__hint">اختر مستخدماً لبدء محادثة فردية</p>
+
+        <ul class="contact-list" id="contactList">
+          <li>
+            <a href="chat-c1.html" class="contact-item" data-search="سارة 01001234501">
+              <div class="avatar-wrap">
+                <div class="avatar avatar--sm" style="background:#128c7e">س</div>
+                <span class="status-dot status-dot--online" title="متصل"></span>
+              </div>
+              <div class="contact-item__body">
+                <span class="contact-item__name">سارة</span>
+                <span class="contact-item__phone">0100 123 4501</span>
+              </div>
+              <span class="contact-item__badge">محادثة موجودة</span>
+            </a>
+          </li>
+          <li>
+            <a href="chat-c2.html" class="contact-item" data-search="محمد 01009876543">
+              <div class="avatar-wrap">
+                <div class="avatar avatar--sm" style="background:#34b7f1">م</div>
+                <span class="status-dot status-dot--offline" title="غير متصل"></span>
+              </div>
+              <div class="contact-item__body">
+                <span class="contact-item__name">محمد</span>
+                <span class="contact-item__phone">0100 987 6543</span>
+              </div>
+              <span class="contact-item__badge">محادثة موجودة</span>
+            </a>
+          </li>
+          <li>
+            <a href="chat-c3.html" class="contact-item" data-search="نور 01005551234">
+              <div class="avatar-wrap">
+                <div class="avatar avatar--sm" style="background:#7c4dff">ن</div>
+                <span class="status-dot status-dot--online" title="متصل"></span>
+              </div>
+              <div class="contact-item__body">
+                <span class="contact-item__name">نور</span>
+                <span class="contact-item__phone">0100 555 1234</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="chat-c4.html" class="contact-item" data-search="خالد 01006667890">
+              <div class="avatar-wrap">
+                <div class="avatar avatar--sm" style="background:#e91e63">خ</div>
+                <span class="status-dot status-dot--offline" title="غير متصل"></span>
+              </div>
+              <div class="contact-item__body">
+                <span class="contact-item__name">خالد</span>
+                <span class="contact-item__phone">0100 666 7890</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="chat-c5.html" class="contact-item" data-search="ليلى 01007774321">
+              <div class="avatar-wrap">
+                <div class="avatar avatar--sm" style="background:#ff9800">ل</div>
+                <span class="status-dot status-dot--online" title="متصل"></span>
+              </div>
+              <div class="contact-item__body">
+                <span class="contact-item__name">ليلى</span>
+                <span class="contact-item__phone">0100 777 4321</span>
+              </div>
+            </a>
+          </li>
+        </ul>
+
+        <div class="contact-list__empty" id="contactListEmpty">
+          <i class="bi bi-person-x contact-list__empty-icon"></i>
+          <p>لا يوجد مستخدمون مطابقون للبحث</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="../assets/js/sidebar.js"></script>
+  <script src="../assets/js/conversations.js"></script>
+  <script src="../assets/js/new-chat.js"></script>
+</body>
+</html>
