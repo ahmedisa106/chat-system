@@ -16,21 +16,41 @@ class ConversationController extends Controller
 {
     public function create()
     {
-        $users = User::whereNot('id', auth()->id())
-            ->addSelect(['conversation_id' => function ($q) {
-                $q->from('conversation_participants as cp1')
+        // $users = User::whereNot('id', auth()->id())
+        //     ->addSelect(['conversation_id' => function ($q) {
+        //         $q->from('conversation_participants as cp1')
+        //             ->select('cp1.conversation_id')
+        //             ->join('conversation_participants as cp2', 'cp2.conversation_id', 'cp1.conversation_id')
+        //             ->join('messages', 'messages.conversation_id', 'cp1.conversation_id')
+        //             ->where('cp1.user_id', auth()->id())
+        //             ->whereColumn('cp2.user_id', 'users.id')
+        //             ->limit(1);
+        //     }])
+        //     ->get()
+        //     ->map(function ($row) {
+        //         $row->has_chat_with_me = ! is_null($row->conversation_id);
+        //         return $row;
+        //     });
+        // dd(auth()->id());
+        $users = User::query()
+            ->whereNot('id', auth()->id())
+            ->select('users.*')
+            ->selectSub(function ($q) {
+                $q->from('conversation_participants as  cp1')
                     ->select('cp1.conversation_id')
-                    ->join('conversation_participants as cp2', 'cp2.conversation_id', 'cp1.conversation_id')
-                    ->join('messages', 'messages.conversation_id', 'cp1.conversation_id')
+                    ->join('conversation_participants as cp2', 'cp1.conversation_id', 'cp2.conversation_id')
                     ->where('cp1.user_id', auth()->id())
                     ->whereColumn('cp2.user_id', 'users.id')
-                    ->limit(1);
-            }])
-            ->get()
-            ->map(function ($row) {
-                $row->has_chat_with_me = ! is_null($row->conversation_id);
-                return $row;
+                    ->join('messages', 'cp1.conversation_id', 'messages.conversation_id')
+                    ->limit(1)
+                ;
+            }, 'conversation_id')
+            ->paginate(10)
+            ->through(function ($item) {
+                $item->has_chat_with_me = !is_null($item->conversatino_id);
+                return $item;
             });
+        // dd($users);
 
         return view('conversations.create', compact('users'));
     }
@@ -43,7 +63,7 @@ class ConversationController extends Controller
             ->first();
 
         if ($existedConversation) {
-            return redirect()->route('conversations.show', $existedConversation);
+            return to_route('conversations.show', $existedConversation);
         }
 
         return view('conversations.chat', ['user' => $user]);
@@ -104,16 +124,21 @@ class ConversationController extends Controller
 
     public function show(Conversation $conversation)
     {
+        abort_unless($conversation->participants()->where('users.id', auth()->id())->exists(), 403);
+
         $conversation->loadMissing(['messages' => [
             'sender',
             'recipt'
         ]]);
+
         $user = $conversation->participants()->whereNot('user_id', auth()->id())->first();
 
         $conversation->messages()
             ->cursor()
             ->each(function ($message) {
-                $message->recipt()->where('receiver_id', auth()->id())->update(['status' => MessageReciptStatusEnum::READ]);
+                $message->recipt()
+                    ->where('receiver_id', auth()->id())
+                    ->update(['status' => MessageReciptStatusEnum::READ]);
             });
 
         broadcast(new ChangeMessageReciptStatus($conversation, auth()->id()));
@@ -134,18 +159,7 @@ class ConversationController extends Controller
                 'type' => $type
             ]);
 
-        ConversationParticipant::query()->upsert([
-            [
-                'conversation_id' => $conversation->id,
-                'user_id' => $author->id,
-
-            ],
-            [
-                'conversation_id' => $conversation->id,
-                'user_id' => $participantId,
-
-            ]
-        ], ['user_id', 'conversation_id']);
+        $conversation->participants()->syncWithoutDetaching([$author->id, $participantId]);
 
         return $conversation;
     }

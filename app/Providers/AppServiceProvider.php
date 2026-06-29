@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Observers\ConversationObserver;
 use App\Observers\MessageObserver;
 use App\Observers\UserObserver;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
@@ -31,5 +32,7 @@ class AppServiceProvider extends ServiceProvider
         Conversation::observe(ConversationObserver::class);
 
         // URL::forceScheme("https");
+
+        Paginator::useBootstrap();
     }
 }

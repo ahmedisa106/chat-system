@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\ConversationTypeEnum;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Conversation extends Model
